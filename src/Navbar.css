@@ -1,0 +1,28 @@
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  padding: 1.2rem;
+  min-height: 1.8rem;
+  justify-content: space-between;
+  z-index: 1;
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+}
+.nav_background {
+  background-color: #111;
+}
+.nav_logo {
+  position: fixed;
+  top: 1.6rem;
+  left: 1rem;
+  width: 5rem;
+  object-fit: contain;
+}
+.profile_pic {
+  position: fixed;
+  right: 2rem;
+  width: 1.875rem;
+  object-fit: contain;
+}
