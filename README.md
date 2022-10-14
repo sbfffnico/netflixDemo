@@ -1,6 +1,6 @@
 # Netflix Demo
 
-Netflix demo/clone created with React and deployed with Firebase
+Netflix demo/clone created with React and deployed with Firebase connected with TDMB api.
 
 ## To run:
 
