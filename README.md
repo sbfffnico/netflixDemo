@@ -4,7 +4,7 @@ Netflix demo/clone created with React and deployed with Firebase connected with 
 
 ## To run:
 
-Download the necessary files and unzip if necessary
+Download the necessary files and unzip if necessary<br />
 From within the project directory/folder and inside the terminal, run 'npm start'
 
 For help installing React: https://reactjs.org/docs/getting-started.html
