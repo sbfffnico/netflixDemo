@@ -10,6 +10,7 @@ function Row({title, fetchURL, isLargeRow}) {
   const [movies, setMovies] = useState([]);
   const [trailerURL, setTrailerURL] = useState('');
   const [isPlayed, setIsPlayed] = useState(-1);
+  const [imgKey, setImgKey] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -21,12 +22,14 @@ function Row({title, fetchURL, isLargeRow}) {
     fetchData();
   }, [fetchURL]);
 
-  const enablePlayed = (index) => {
+  const enablePlayed = (movie,index) => {
+    console.log("HEREee " + imgKey);
+    console.log("HEREee 21 " + movie.id);
     isPlayed === index ? setIsPlayed(null) : setIsPlayed(index);
   }
 
   function playMovieTrailer (movie, index) {
-    enablePlayed(index);
+    enablePlayed(movie,index);
     if (trailerURL) {
       setTrailerURL('');
     }
@@ -35,7 +38,8 @@ function Row({title, fetchURL, isLargeRow}) {
       .then(function (url) {
         const urlParams = new URLSearchParams(new URL(url).search);
         setTrailerURL(urlParams.get('v'));
-      }).catch(function (error) {console.log("Movie trailer error: " + error + ", URL: " + (trailerURL || movie?.title || movie?.name || movie?.original_name || ""))});
+        console.log("TrailerURL: " + urlParams.get('v'));
+      }).catch(function (error) {console.log("Movie trailer error: " + error + ", URL: " + (trailerURL || movie?.title || movie?.name || movie?.original_name || ""));setTrailerURL("dQw4w9WgXcQ")});
     }
   }
 
@@ -60,10 +64,10 @@ function Row({title, fetchURL, isLargeRow}) {
       <div className="row_posters">
         {movies.map((movie,index) => (
           <img 
-              key={movie.id} 
+              key={movie.id}
               onClick={() => {
                 playMovieTrailer(movie, index);
-                console.log("HEREEE: " + movie.id);
+                setImgKey(movie.id);
                 }}
               className={`row_poster ${isLargeRow ? " row_posterLarge" : ""} ${isPlayed === index ? " row_poster_played" : ""}`}
               src={`${baseImageURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
