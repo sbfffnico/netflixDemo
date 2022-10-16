@@ -3,6 +3,7 @@ import Row from './Row';
 import requests from './requests';
 
 function Movies() {
+
   return (
     <div>
       <Row title="Trending Now" fetchURL={requests.fetchTrendingNow} />

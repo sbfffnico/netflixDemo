@@ -19,6 +19,7 @@
   left: 1rem;
   width: 5rem;
   object-fit: contain;
+  cursor: pointer;
 }
 .profile_pic {
   position: fixed;

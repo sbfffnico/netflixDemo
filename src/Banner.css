@@ -40,6 +40,14 @@
   background-color: rgba(180, 177, 177, 0.848);
   transition: all 0.2s;
 }
+.banner_moreinfo {
+  background-color: rgba(51,51,51,0.5);
+  min-height: 2.5rem;
+  width: 14.45rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  
+}
 .banner_fadebottom {
   height: 7.4rem;
   background-image: linear-gradient(180deg, transparent, rgba(37,37,37,0.61),#111);

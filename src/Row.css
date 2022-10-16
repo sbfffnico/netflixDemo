@@ -24,6 +24,7 @@
   max-height: 115px;
   transition: transform 450ms;
   margin-right: 15px;
+  cursor: pointer;
 }
 .row_poster:hover{
   transform: scale(1.15);
