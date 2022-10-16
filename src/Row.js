@@ -10,7 +10,7 @@ function Row({title, fetchURL, isLargeRow}) {
   const [movies, setMovies] = useState([]);
   const [trailerURL, setTrailerURL] = useState('');
   const [isPlayed, setIsPlayed] = useState(-1);
-  const [imgKey, setImgKey] = useState();
+  const [prevIndex, setPrevIndex] = useState(-1);
 
   useEffect(() => {
     async function fetchData() {
@@ -22,23 +22,21 @@ function Row({title, fetchURL, isLargeRow}) {
     fetchData();
   }, [fetchURL]);
 
-  const enablePlayed = (movie,index) => {
-    console.log("HEREee " + imgKey);
-    console.log("HEREee 21 " + movie.id);
+  const enablePlayed = (index) => {
     isPlayed === index ? setIsPlayed(null) : setIsPlayed(index);
   }
 
   function playMovieTrailer (movie, index) {
-    enablePlayed(movie,index);
-    if (trailerURL) {
+    enablePlayed(index);
+    if(index === prevIndex) {
       setTrailerURL('');
     }
     else {
+      setTrailerURL('');
       movieTrailer(movie?.title || movie?.name || movie?.original_name || "")
       .then(function (url) {
         const urlParams = new URLSearchParams(new URL(url).search);
         setTrailerURL(urlParams.get('v'));
-        console.log("TrailerURL: " + urlParams.get('v'));
       }).catch(function (error) {console.log("Movie trailer error: " + error + ", URL: " + (trailerURL || movie?.title || movie?.name || movie?.original_name || ""));setTrailerURL("dQw4w9WgXcQ")});
     }
   }
@@ -66,8 +64,8 @@ function Row({title, fetchURL, isLargeRow}) {
           <img 
               key={movie.id}
               onClick={() => {
-                playMovieTrailer(movie, index);
-                setImgKey(movie.id);
+                playMovieTrailer(movie,index);
+                setPrevIndex(index);
                 }}
               className={`row_poster ${isLargeRow ? " row_posterLarge" : ""} ${isPlayed === index ? " row_poster_played" : ""}`}
               src={`${baseImageURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
