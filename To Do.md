@@ -8,10 +8,11 @@
 - Enable play option for banner - COMPLETED
 - Change my list to more info and pull data from api to reflect - COMPLETED
 - Enable Netflix logo to pull to top of screen - COMPLETED
+- Add help section next to profile icon to explain current issues - COMPLETED
 
 ## To Do
 
 - Add stop/start feature to work for different rows
 - Change playback to be centered over the current image/trailer chosen vs being fixed at the top
 - Add buttons to each row to enable movement through topic instead of relying on keypad / middle mouse button
-- Add help section next to profile icon to explain current issues
+
