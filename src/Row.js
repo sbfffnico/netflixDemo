@@ -9,7 +9,7 @@ const baseImageURL = "https://image.tmdb.org/t/p/original";
 function Row({title, fetchURL, isLargeRow}) {
   const [movies, setMovies] = useState([]);
   const [trailerURL, setTrailerURL] = useState('');
-  const [isPlayed, setIsPlayed] = useState(false);
+  const [isPlayed, setIsPlayed] = useState(-1);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,12 +21,12 @@ function Row({title, fetchURL, isLargeRow}) {
     fetchData();
   }, [fetchURL]);
 
-  const enablePlayed = () => {
-    setIsPlayed(!isPlayed);
+  const enablePlayed = (index) => {
+    isPlayed === index ? setIsPlayed(null) : setIsPlayed(index);
   }
 
-  function playMovieTrailer (movie) {
-    enablePlayed();
+  function playMovieTrailer (movie, index) {
+    enablePlayed(index);
     if (trailerURL) {
       setTrailerURL('');
     }
@@ -52,18 +52,20 @@ function Row({title, fetchURL, isLargeRow}) {
     },
   };
 
+  
+
   return (
     <div className='row'>
       <h2>{title}</h2>
       <div className="row_posters">
-        {movies.map(movie => (
+        {movies.map((movie,index) => (
           <img 
               key={movie.id} 
               onClick={() => {
-                playMovieTrailer(movie);
-                //enablePlayed();
+                playMovieTrailer(movie, index);
+                console.log("HEREEE: " + movie.id);
                 }}
-              className={`row_poster ${isLargeRow ? " row_posterLarge" : ""} ${isPlayed ? " row_poster_played" : ""}`}
+              className={`row_poster ${isLargeRow ? " row_posterLarge" : ""} ${isPlayed === index ? " row_poster_played" : ""}`}
               src={`${baseImageURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
               alt={movie?.title || movie?.name || movie?.original_name}
           />
@@ -80,8 +82,8 @@ function Row({title, fetchURL, isLargeRow}) {
           backgroundColor: "rgb(1, 1, 1)",
           zIndex: "1",
       }}/>}
+      
       </div>
-        
     </div>
   )
 }
