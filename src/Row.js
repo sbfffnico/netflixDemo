@@ -30,14 +30,20 @@ function Row({title, fetchURL, isLargeRow}) {
     enablePlayed(index);
     if(index === prevIndex) {
       setTrailerURL('');
+      setPrevIndex(-1);
     }
     else {
       setTrailerURL('');
+      setPrevIndex(index);
       movieTrailer(movie?.title || movie?.name || movie?.original_name || "")
       .then(function (url) {
         const urlParams = new URLSearchParams(new URL(url).search);
         setTrailerURL(urlParams.get('v'));
-      }).catch(function (error) {console.log("Movie trailer error: " + error + ", URL: " + (trailerURL || movie?.title || movie?.name || movie?.original_name || ""));setTrailerURL("dQw4w9WgXcQ")});
+      }).catch(function (error) {
+            console.log("Movie trailer error: " + error + ", URL: " + (trailerURL || movie?.title || movie?.name || movie?.original_name || ""));
+            setTrailerURL("dQw4w9WgXcQ");
+          }
+        );
     }
   }
 
@@ -65,7 +71,6 @@ function Row({title, fetchURL, isLargeRow}) {
               key={movie.id}
               onClick={() => {
                 playMovieTrailer(movie,index);
-                setPrevIndex(index);
                 }}
               className={`row_poster ${isLargeRow ? " row_posterLarge" : ""} ${isPlayed === index ? " row_poster_played" : ""}`}
               src={`${baseImageURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
