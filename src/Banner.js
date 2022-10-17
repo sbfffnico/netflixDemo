@@ -82,7 +82,13 @@ function Banner() {
       <h1 className="banner_description">{truncateDescription(movie?.overview,500)}</h1>
       <div className="banner_buttons">
         <button className="banner_button" onClick={() => playMovieTrailer(movie)}>{playText}</button>
-        <button className="banner_button" onClick = {() => moreInfo()}>More Info</button>
+        <button 
+          className="banner_button" 
+          onMouseEnter={() => {moreInfo()}}
+          onMouseLeave={() => {moreInfo()}}
+        >
+          More Info
+        </button>
         {trailerURL && 
         <YouTube videoId={trailerURL} opts={options} 
         style={{
@@ -93,7 +99,7 @@ function Banner() {
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "rgb(1, 1, 1)",
-      }}/>}
+        }}/>}
         <div className="banner_moreinfo" style={{visibility: showMoreInfo}}>
           Original Air Date: {movie.first_air_date}<br />
           Rating: {movie.vote_average}/10

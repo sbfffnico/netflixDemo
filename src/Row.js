@@ -6,7 +6,7 @@ import "./Row.css";
 
 const baseImageURL = "https://image.tmdb.org/t/p/original";
 
-function Row({title, fetchURL, isLargeRow}) {
+function Row({title, fetchURL, isLargeRow, checkRowTitle, setCheckRowTitle}) {
   const [movies, setMovies] = useState([]);
   const [trailerURL, setTrailerURL] = useState('');
   const [isPlayed, setIsPlayed] = useState(-1);
@@ -22,13 +22,17 @@ function Row({title, fetchURL, isLargeRow}) {
     fetchData();
   }, [fetchURL]);
 
+  const updateRowTitle = () => {
+    setCheckRowTitle(title);
+  }
+
   const enablePlayed = (index) => {
-    isPlayed === index ? setIsPlayed(null) : setIsPlayed(index);
+    (isPlayed === index && checkRowTitle === title) ? setIsPlayed(null) : setIsPlayed(index);
   }
 
   function playMovieTrailer (movie, index) {
     enablePlayed(index);
-    if(index === prevIndex) {
+    if(index === prevIndex && checkRowTitle === title) {
       setTrailerURL('');
       setPrevIndex(-1);
     }
@@ -60,8 +64,6 @@ function Row({title, fetchURL, isLargeRow}) {
     },
   };
 
-  
-
   return (
     <div className='row'>
       <h2>{title}</h2>
@@ -70,14 +72,15 @@ function Row({title, fetchURL, isLargeRow}) {
           <img 
               key={movie.id}
               onClick={() => {
+                updateRowTitle();
                 playMovieTrailer(movie,index);
                 }}
-              className={`row_poster ${isLargeRow ? " row_posterLarge" : ""} ${isPlayed === index ? " row_poster_played" : ""}`}
+              className={`row_poster ${isLargeRow ? " row_posterLarge" : ""} ${(isPlayed === index && checkRowTitle === title) ? " row_poster_played" : ""}`}
               src={`${baseImageURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
               alt={movie?.title || movie?.name || movie?.original_name}
           />
         ))}
-        {trailerURL && 
+        {(trailerURL && checkRowTitle === title) && 
         <YouTube videoId={trailerURL} opts={options} 
         style={{
           position: "fixed",
