@@ -52,7 +52,7 @@ function Navbar() {
       <div className="nav_helpbox" style={{visibility:helpBox}}>
         <br /><strong>Known Issues:</strong><br />
         - Navigating through row of movies requires left/right on keypad or change cursor to scroll mode <br />
-        - Movies within different rows/topics can play simultaneously.  To fix temporarily, ensure nothing in a prior topic is playing before moving to a new row.<br /><br />
+        <br />
         <strong>Other</strong> <br />
         - Unfound trailers will play Rick Astley's Never Gonna Give You Up by default.
       </div>

@@ -15,5 +15,6 @@
 ## To Do
 
 * Change playback to be centered over the current image/trailer chosen vs being fixed at the top
+* Add a way to navigate through row without use cursor mode or keypad to move left/right
 
 
